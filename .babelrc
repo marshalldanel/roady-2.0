@@ -1,0 +1,4 @@
+// For testing with Jest - Jest doesn't know about webpack
+{
+  "presets": ["es2015", "react"]
+}

@@ -1,0 +1,26 @@
+// Command for AirBnB Eslint Config
+// (
+//   export PKG=eslint-config-airbnb;
+//   npm info "$PKG@latest" peerDependencies --json | command sed 's/[\{\},]//g ; s/: /@/g' | xargs npm install --save-dev "$PKG@latest"
+// )
+
+{
+  "env": {
+    "browser": true
+  },
+  "extends": "airbnb",
+  "rules": {
+    "default-case": 0,
+    "max-len": [1, 120, 2, {"ignoreComments": true}],
+    "no-cond-assign": [2, "except-parens"],
+    "no-else-return": 0,
+    "no-param-reassign": 0,
+    "no-unused-vars": [1, {"vars": "local", "args": "none"}],
+    "quote-props": [1, "consistent-as-needed"],
+    "react/prefer-stateless-function": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "radix": 0
+    // "space-infix-ops": 0,
+    // "quotes": 0
+  }
+}
