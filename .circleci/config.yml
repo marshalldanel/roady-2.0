@@ -1,0 +1,22 @@
+version: 2
+jobs:
+  build:
+    working_directory: ~/roady-2.0
+    docker:
+      - image: circleci/node:7.10
+    steps:
+      - checkout
+      - restore_cache:
+          keys: 
+            - dependency-cache-{{ checksum "package.json" }}
+            - dependency-cache-
+      - run:
+          name: Install npm
+          command: npm install
+      - save_cache:
+          key: dependency-cache-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+      - run:
+          name: Test
+          command: npm test
