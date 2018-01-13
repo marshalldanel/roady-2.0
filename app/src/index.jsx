@@ -2,6 +2,10 @@ import React from 'react';
 import { render } from 'react-dom';
 import App from './App';
 
-require('../styles/main.scss');
+require('../styles/application.scss');
+
+if (module.hot) {
+  module.hot.accept();
+}
 
 render(<App />, document.getElementById('react-root'));
