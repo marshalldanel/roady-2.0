@@ -9,19 +9,15 @@ class LocationField extends Component {
           <div className="column is-4">
             <div className="field">
               <div className="control">
-                {/* Render autocomplete */}
-                hells
+                {/* Render Cities */}
               </div>
             </div>
           </div>
           <div className="column">
-            chhhhhyea
-            {/* Render DatePicker */}
+            {/* Render Dates */}
           </div>
           <div className="column">
-            boiiiiiii
-            {/* Buttons */}
-
+            {/* Render +/- Buttons */}
           </div>
         </div>
       </div>
