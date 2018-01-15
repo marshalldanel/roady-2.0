@@ -3,6 +3,7 @@ import PlacesAutocomplete from 'react-places-autocomplete';
 import 'react-dates/initialize';
 import 'react-dates/lib/css/_datepicker.css';
 import { DateRangePicker } from 'react-dates';
+import scriptjs from 'scriptjs';
 
 class LocationField extends Component {
   constructor() {
@@ -13,10 +14,23 @@ class LocationField extends Component {
       startDate: null,
       endDate: null,
       error: null,
+      places: false,
     };
   }
 
+  // Fix react-places-autocomplete issue#57 - see PR#107
+  componentDidMount() {
+    scriptjs('https://maps.googleapis.com/maps/api/js?key=AIzaSyCt01gjymT3W0Iqzp3vxpti0R7PG3ZStYs&libraries=places', () => {
+      this.setState({
+        places: true,
+      });
+    });
+  }
+
   render() {
+    // Break if no Google API
+    if (!this.state.places) return null;
+
     // Autocomplete options
     const options = {
       types: ['(cities'],
@@ -79,9 +93,9 @@ class LocationField extends Component {
               onDatesChange={({ startDate, endDate }) => { this.setState({ startDate, endDate }, console.log(startDate, endDate)); }}
               focusedInput={this.state.focusedInput}
               onFocusChange={(focusedInput) => { this.setState({ focusedInput }); }}
-              showDefaultInputIcon // Shows calendar icon
-              required // Is required
-              startDatePlaceholderText="Arriving" // Placeholder text
+              showDefaultInputIcon
+              required
+              startDatePlaceholderText="Arriving"
               endDatePlaceholderText="Departing"
             />
           </div>
