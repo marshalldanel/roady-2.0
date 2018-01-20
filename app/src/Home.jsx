@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateView } from './actions';
+import { updateView } from './store/actions';
 import QuestionsContainer from './QuestionsContainer.jsx';
 import Button from './Button.jsx';
 

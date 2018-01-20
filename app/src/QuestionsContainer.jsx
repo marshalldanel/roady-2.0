@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { addGenre, removeGenre } from './actions';
+import { addGenre, removeGenre } from './store/actions';
 import LocationList from './LocationList.jsx';
 import GenreSelect from './GenreSelect.jsx';
 
