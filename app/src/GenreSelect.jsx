@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 
 class GenreSelect extends Component {
-  render() {
-    const genres = [];
+  constructor(props) {
+    super();
+  }
 
+  render() {
     const genreTypes = [
       {
         genre: 'rock',
@@ -62,21 +64,24 @@ class GenreSelect extends Component {
       return 0;
     });
 
+    const { genres, addGenre, removeGenre } = this.props;
+
     // Maps genres, onClick toggle state and render as 'active'
     const genreSelector = genreTypes.map((item, index) => {
       let buttonClass = 'button is-primary fixed-width-100';
       if (genres.indexOf(item.genre) > -1) {
         buttonClass += ' is-active';
       }
+
       return (
         <div key={index} className="column is-one-quarter is-capitalized">
           {/* eslint-disable jsx-a11y/interactive-supports-focus */}
-          <div
+          <button
             className={buttonClass}
-            role="button"
             onClick={() => {
-              // Update state
-              console.log('hi');
+              buttonClass === 'button is-primary fixed-width-100 is-active' ?
+              removeGenre(item.genre) :
+              addGenre(item.genre);
             }}
           >
             {/* eslint-enable */}
@@ -84,7 +89,7 @@ class GenreSelect extends Component {
               <i className={item.icon} />
             </span>
             <span>{item.genre}</span>
-          </div>
+          </button>
         </div>
       );
     });
