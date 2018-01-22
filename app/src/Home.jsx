@@ -11,13 +11,12 @@ class Home extends Component {
     if (view === 'locations' || view === 'genres') {
       return (
         <div className="section is-large">
-          <QuestionsContainer />
+          <QuestionsContainer view={view} />
           <Button
             view={view}
             updateView={updateView}
           />
           {/* <CitiesResults />   */}
-
         </div>
       );
     } else if (view === 'itinerary') {

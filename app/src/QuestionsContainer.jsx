@@ -6,15 +6,26 @@ import GenreSelect from './GenreSelect.jsx';
 
 class QuestionsContainer extends Component {
   render() {
-    const { genres, addGenre, removeGenre } = this.props;
+    const {
+      view, locations, genres, addGenre, removeGenre,
+    } = this.props;
+
+    let currentView;
+    switch (view) {
+      case 'locations':
+        currentView = <LocationList locations={locations} />;
+        break;
+      case 'genres':
+        currentView = <GenreSelect genres={genres} addGenre={addGenre} removeGenre={removeGenre} />;
+        break;
+      default:
+        currentView = <LocationList locations={locations} />;
+        break;
+    }
+
     return (
       <div>
-        <LocationList />
-        <GenreSelect
-          genres={genres}
-          addGenre={addGenre}
-          removeGenre={removeGenre}
-        />
+        {currentView}
       </div>
     );
   }
@@ -23,6 +34,7 @@ class QuestionsContainer extends Component {
 // Maps state from store to props
 const mapStateToProps = state => ({
   genres: state.genres,
+  locations: state.locations,
 });
 
 // Maps actions to props
