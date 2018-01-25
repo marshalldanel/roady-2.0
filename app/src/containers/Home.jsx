@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateView } from './store/actions';
-import QuestionsContainer from './QuestionsContainer.jsx';
-import Button from './Button.jsx';
+import { updateView } from '../store/actions';
+import QuestionBox from '../components/QuestionBox.jsx';
+import Button from '../components/Button.jsx';
 
 class Home extends Component {
   render() {
@@ -11,7 +11,7 @@ class Home extends Component {
     if (view === 'locations' || view === 'genres') {
       return (
         <div className="section is-large">
-          <QuestionsContainer view={view} />
+          <QuestionBox view={view} />
           <Button
             view={view}
             updateView={updateView}
@@ -29,9 +29,13 @@ class Home extends Component {
   }
 }
 
-// Maps actions to props
+// Maps state/actions to props
+const mapStateToProps = state => ({
+  view: state.view,
+});
+
 const mapDispatchToProps = dispatch => ({
   updateView: view => dispatch(updateView(view)),
 });
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

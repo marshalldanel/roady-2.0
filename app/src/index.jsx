@@ -11,7 +11,7 @@ const rootEl = document.getElementById('react-root');
 
 const render = () => {
   // eslint-disable-next-line global-require
-  const App = require('./App').default;
+  const App = require('./components/App').default;
 
   ReactDOM.render(
     <Provider store={store}>
@@ -23,9 +23,9 @@ const render = () => {
 
 if (module.hot) {
   console.log('client hot');
-  module.hot.accept('./App', () => {
+  module.hot.accept('./components/App', () => {
     // eslint-disable-next-line global-require
-    const nextApp = require('./App').default;
+    const nextApp = require('./components/App').default;
     render(nextApp);
   });
 }

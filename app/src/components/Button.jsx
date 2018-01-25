@@ -1,10 +1,6 @@
 import React, { Component } from 'react';
 
 class Button extends Component {
-  constructor(props) {
-    super();
-  }
-
   render() {
     let isButton;
     const { view, updateView } = this.props;

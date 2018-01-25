@@ -1,10 +1,8 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { addGenre, removeGenre } from '../store/actions';
 
 class GenreSelect extends Component {
-  constructor(props) {
-    super();
-  }
-
   render() {
     const genreTypes = [
       {
@@ -111,4 +109,17 @@ class GenreSelect extends Component {
   }
 }
 
-export default GenreSelect;
+// Maps state from store to props
+const mapStateToProps = state => ({
+  genres: state.genres,
+});
+
+// Maps actions to props
+const mapDispatchToProps = dispatch => ({
+  addGenre: genre => dispatch(addGenre(genre)),
+  removeGenre: genre => dispatch(removeGenre(genre)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(GenreSelect);
+
+// export default GenreSelect;
