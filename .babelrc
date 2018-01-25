@@ -1,4 +1,5 @@
-// For testing with Jest - Jest doesn't know about webpack
+// All Babel presets here - Also helps Jest find them
+
 {
-  "presets": ["es2015", "react"]
+  "presets": [ ["env", { "modules": false }], "react", "stage-0"]
 }
