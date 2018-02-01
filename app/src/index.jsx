@@ -21,6 +21,12 @@ const render = () => {
   );
 };
 
+if (process.env.NODE_ENV !== 'production') {
+  // eslint-disable-next-line global-require
+  const { whyDidYouUpdate } = require('why-did-you-update');
+  whyDidYouUpdate(React);
+}
+
 if (module.hot) {
   console.log('client hot');
   module.hot.accept('./components/App', () => {
