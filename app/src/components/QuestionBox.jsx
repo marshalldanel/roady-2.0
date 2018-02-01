@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LocationList from '../containers/LocationList.jsx';
+import LocationForm from '../containers/LocationForm.jsx';
 import GenreSelect from '../containers/GenreSelect.jsx';
 
 class QuestionBox extends Component {
@@ -9,13 +9,13 @@ class QuestionBox extends Component {
     let currentView;
     switch (view) {
       case 'locations':
-        currentView = <LocationList />;
+        currentView = <LocationForm />;
         break;
       case 'genres':
         currentView = <GenreSelect />;
         break;
       default:
-        currentView = <LocationList />;
+        currentView = <LocationForm />;
         break;
     }
 
