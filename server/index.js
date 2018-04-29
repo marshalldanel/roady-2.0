@@ -7,11 +7,11 @@ require('dotenv').config();
 
 // Initializes webpack functions on the server, and compiles.
 const webpack = require('webpack');
-const devserver = require('webpack-dev-middleware');
-const hotmodule = require('webpack-hot-middleware');
-const webpackconfig = require('../webpack.config.js');
+const devServer = require('webpack-dev-middleware');
+const hotModule = require('webpack-hot-middleware');
+const webpackConfig = require('../webpack.config.js');
 
-const compiler = webpack(webpackconfig);
+const compiler = webpack(webpackConfig);
 
 // Sets port to 3000, and defaults to development mode unless specified in NODE_ENV
 const PORT = 3000;
@@ -21,7 +21,7 @@ const ENV = process.env.NODE_ENV || 'development';
 const morgan = require('morgan');
 
 function skipLog(req, res) {
-  let url = req.url;
+  let { url } = req;
   if (url.indexOf('?') > 0) {
     url = url.substr(0, url.indexOf('?'));
   }
@@ -35,11 +35,11 @@ app.use(morgan('dev', {
   skip: skipLog,
 }));
 
-// Pulls static files from build folder if in production mode, otherwise will start webpack dev server and hotmodule
+// Pulls static files from build folder if in production mode, otherwise will start webpack dev server and hotModule
 if (ENV === 'production') {
   app.use(express.static('build'));
 } else {
-  app.use(devserver(compiler, {
+  app.use(devServer(compiler, {
     watchOptions: {
       poll: 1000,
       ignored: /node_modules/,
@@ -49,7 +49,7 @@ if (ENV === 'production') {
       colors: true,
     },
   }));
-  app.use(hotmodule(compiler));
+  app.use(hotModule(compiler));
 }
 
 app.listen(PORT, '0.0.0.0', 'localhost', () => console.log(`Listening on ${PORT} in ${ENV} mode. Wait for compile...`));
