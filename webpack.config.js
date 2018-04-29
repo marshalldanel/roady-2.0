@@ -9,7 +9,7 @@ const isDev = ENV === 'development';
 const config = {
   entry: {
     app: [
-      path.resolve(__dirname, 'app/src/index.jsx'),
+      path.resolve(__dirname, 'app/src/index.js'),
     ],
   },
   // https://webpack.js.org/configuration/output/
