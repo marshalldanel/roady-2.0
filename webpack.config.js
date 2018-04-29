@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const HTMLWebpackPlugin = require('html-webpack-plugin');
 
 const ENV = process.env.NODE_ENV || 'development';
+const isDev = ENV === 'development';
 
 const config = {
   entry: {
@@ -16,6 +17,7 @@ const config = {
     path: path.resolve(__dirname, 'build'),
     filename: 'js/[name]-bundle-generated.js',
   },
+  mode: isDev ? 'development' : 'production',
   // https://webpack.js.org/configuration/devtool/#devtool
   devtool: ENV === 'production' ? 'cheap-source-map' : 'eval-source-map',
   // https://webpack.js.org/configuration/dev-server/
@@ -68,6 +70,7 @@ const config = {
     ],
   },
   plugins: [
+    new webpack.optimize.OccurrenceOrderPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoEmitOnErrorsPlugin(),
     new HTMLWebpackPlugin({
@@ -78,7 +81,7 @@ const config = {
   ],
 };
 
-if (ENV === 'development') {
+if (isDev) {
   config.entry.app.unshift('webpack-hot-middleware/client');
 }
 
