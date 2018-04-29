@@ -6,8 +6,8 @@ import { DateRangePicker } from 'react-dates';
 import scriptjs from 'scriptjs';
 
 class LocationField extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       city: '',
@@ -20,7 +20,7 @@ class LocationField extends Component {
 
   // Fix react-places-autocomplete issue#57 - see PR#107
   componentDidMount() {
-    scriptjs('https://maps.googleapis.com/maps/api/js?key=AIzaSyCt01gjymT3W0Iqzp3vxpti0R7PG3ZStYs&libraries=places', () => {
+    scriptjs('https://maps.googleapis.com/maps/api/js?key=AIzaSyDnTWnxunEDd6nD-pPMdPEY8sZQPZYG-Pc&libraries=places', () => {
       this.setState({
         places: true,
       });
@@ -32,34 +32,33 @@ class LocationField extends Component {
     if (!this.state.places) return null;
 
     // Autocomplete options
-    const options = {
-      types: ['(cities'],
-    };
-    const inputProps = {
-      value: this.state.city, // Req to work
-      onChange: city => this.setState({ city }),
-      placeholder: 'Destination...',
-    };
-    const myStyles = {
-      autocompleteContainer: { zIndex: 2 },
-    };
-    const cssClasses = {
-      input: 'form-text-field-input',
+    const searchOptions = {
+      types: ['(cities)'],
+      componentRestrictions: {
+        country: 'us',
+      },
     };
 
-    // Add in buttons cond render
-    const buttons = (
-      <div>
-        <button className="button is-primary is-outlined has-text-centered locationsButtons">
-          <div className="icon">
-            <i className="fa fa-plus" />
-          </div>
-        </button>
-        <button className="button is-primary is-outlined has-text-centered locationsButtons">
-          <div className="icon">
-            <i className="fa fa-minus" />
-          </div>
-        </button>
+    const renderPlaces = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
+      <div className="autocomplete-root">
+        <input {...getInputProps({
+            placeholder: 'Destination...',
+            className: 'form-text-field-input',
+          })}
+        />
+        <div className="autocomplete-dropdown-container">
+          {suggestions.map((suggestion) => {
+            const className = suggestion.active ? 'suggestion-item--active' : 'suggestion-item';
+            const style = suggestion.active
+                        ? { backgroundColor: '#fafafa', cursor: 'pointer' }
+                        : { backgroundColor: '#ffffff', cursor: 'pointer' };
+            return (
+              <div {...getSuggestionItemProps(suggestion, { className, style })}>
+                <span>{suggestion.description}</span>
+              </div>
+            );
+          })}
+        </div>
       </div>
     );
 
@@ -73,13 +72,13 @@ class LocationField extends Component {
               <div className="control">
                 {/* Render Cities */}
                 <PlacesAutocomplete
-                  inputProps={inputProps}
-                  options={options}
-                  googleLogo={false}
-                  styles={myStyles}
+                  searchOptions={searchOptions}
                   highlightFirstSuggestion
-                  classNames={cssClasses}
-                />
+                  value={this.state.city}
+                  onChange={(city) => { this.setState({ city }); }}
+                >
+                  {renderPlaces}
+                </PlacesAutocomplete>
               </div>
             </div>
           </div>
@@ -99,9 +98,7 @@ class LocationField extends Component {
               endDatePlaceholderText="Departing"
             />
           </div>
-          <div className="column">
-            {buttons}
-          </div>
+          <div className="column" />
         </div>
       </div>
     );

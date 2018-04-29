@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import LocationList from './LocationList.jsx';
-import GenreSelect from './GenreSelect.jsx';
+import LocationList from './LocationList';
+import GenreSelect from './GenreSelect';
 
 class QuestionsContainer extends Component {
   render() {

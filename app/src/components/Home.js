@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import QuestionsContainer from './QuestionsContainer.jsx';
+import QuestionsContainer from './QuestionsContainer';
 
 class Home extends Component {
   render() {
     return (
-      <div className="section is-large">
+      <div>
+        <div className="section is-small" />
         <QuestionsContainer />
       </div>
     );

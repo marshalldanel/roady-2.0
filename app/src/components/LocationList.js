@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import LocationField from './LocationField.jsx';
+import LocationField from '../containers/LocationField';
 
 class LocationList extends Component {
   render() {
